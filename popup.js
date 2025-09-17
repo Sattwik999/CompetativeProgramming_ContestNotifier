@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // LeetCode
             if (selectedPlatforms.includes('leetcode.com')) {
                 try {
-                    const response = await fetch('https://YOUR_PROXY_URL/leetcode');
+                    const response = await fetch('https://competativeprogramming-contestnotifier.onrender.com/leetcode');
                     const html = await response.text();
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(html, 'text/html');
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // CodeChef
             if (selectedPlatforms.includes('codechef.com')) {
                 try {
-                    const response = await fetch('https://YOUR_PROXY_URL/codechef');
+                    const response = await fetch('https://competativeprogramming-contestnotifier.onrender.com/codechef');
                     const html = await response.text();
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(html, 'text/html');
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Codeforces
             if (selectedPlatforms.includes('codeforces.com')) {
                 try {
-                    const response = await fetch('https://YOUR_PROXY_URL/codeforces');
+                    const response = await fetch('https://competativeprogramming-contestnotifier.onrender.com/codeforces');
                     const data = await response.json();
                     if (data.status === 'OK') {
                         const cfContests = data.result.filter(c => c.phase === 'BEFORE').map(c => ({

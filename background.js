@@ -20,19 +20,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
       if (selectedPlatforms.includes('leetcode.com')) {
         try {
-          const response = await fetchWithTimeout('https://YOUR_PROXY_URL/leetcode');
+          const response = await fetchWithTimeout('https://competativeprogramming-contestnotifier.onrender.com/leetcode');
           if (response) leetcodeHtml = await response.text();
         } catch {}
       }
       if (selectedPlatforms.includes('codechef.com')) {
         try {
-          const response = await fetchWithTimeout('https://YOUR_PROXY_URL/codechef');
+          const response = await fetchWithTimeout('https://competativeprogramming-contestnotifier.onrender.com/codechef');
           if (response) codechefHtml = await response.text();
         } catch {}
       }
       if (selectedPlatforms.includes('codeforces.com')) {
         try {
-          const response = await fetch('https://YOUR_PROXY_URL/codeforces');
+          const response = await fetch('https://competativeprogramming-contestnotifier.onrender.com/codeforces');
           const data = await response.json();
           if (data.status === 'OK') {
             codeforcesContests = data.result.filter(c => c.phase === 'BEFORE').map(c => ({
@@ -89,7 +89,7 @@ async function fetchAllContests(selectedPlatforms) {
   // LeetCode
   async function fetchLeetCodeContests() {
     try {
-      const response = await fetch('https://YOUR_PROXY_URL/leetcode');
+      const response = await fetch('https://competativeprogramming-contestnotifier.onrender.com/leetcode');
       const html = await response.text();
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
@@ -121,7 +121,7 @@ async function fetchAllContests(selectedPlatforms) {
   // Codeforces
   async function fetchCodeforcesContests() {
     try {
-      const response = await fetch('https://YOUR_PROXY_URL/codeforces');
+      const response = await fetch('https://competativeprogramming-contestnotifier.onrender.com/codeforces');
       const data = await response.json();
       if (data.status !== 'OK') return [];
       const contests = data.result.filter(c => c.phase === 'BEFORE').map(c => ({
@@ -140,7 +140,7 @@ async function fetchAllContests(selectedPlatforms) {
   // CodeChef
   async function fetchCodeChefContests() {
     try {
-      const response = await fetch('https://YOUR_PROXY_URL/codechef');
+      const response = await fetch('https://competativeprogramming-contestnotifier.onrender.com/codechef');
       const html = await response.text();
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
