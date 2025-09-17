@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coding Contest Helper</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-width: 350px;
+            max-width: 400px;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            background: white;
+            margin: 0;
+            padding: 20px;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        .info {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px 16px;
+            margin: 10px 0;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .section {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .contest-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contest-item {
+            background: white;
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .contest-item:hover {
+            transform: translateX(5px);
+        }
+
+        .contest-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .contest-time {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .tools-dropdown {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        .tools-dropdown a {
+            display: block;
+            padding: 10px 12px;
+            margin: 4px 0;
+            text-decoration: none;
+            color: #333;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .tools-dropdown a:hover {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #667eea;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .error {
+            color: #e74c3c;
+            text-align: center;
+            padding: 15px;
+            background: #fdf2f2;
+            border-radius: 6px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-style: italic;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>🏆 Coding Contest Helper</h1>
+            <div class="info">
+                Quickly access upcoming contests and tools for competitive programming.
+            </div>
+        </div>
+
+        <div class="section">
+            <button class="btn" id="view-contests">📅 View Upcoming Contests</button>
+            <button class="btn btn-secondary" id="refresh-contests" style="display:none;">🔄 Refresh Contests</button>
+        </div>
+
+        <div id="contest-section" style="display:none;" class="fade-in">
+            <div id="contest-loading" class="loading" style="display:none;">Loading contests</div>
+            <div id="contest-error" class="error" style="display:none;"></div>
+            <div id="contest-empty" class="empty" style="display:none;">No upcoming contests for your selected platforms.</div>
+            <ul id="contest-list" class="contest-list"></ul>
+        </div>
+
+        <div id="tools-section" class="section">
+            <button class="btn" id="open-tools">🛠️ Open Coding Tools</button>
+            <div id="tools-dropdown" class="tools-dropdown" style="display:none; margin-top:12px;">
+                <a href="https://codeforces.com/" target="_blank">🏅 Codeforces</a>
+                <a href="https://leetcode.com/" target="_blank">💻 LeetCode</a>
+                <a href="https://www.codechef.com/" target="_blank">👨‍🍳 CodeChef</a>
+                <a href="https://www.topcoder.com/" target="_blank">🏆 TopCoder</a>
+                <a href="https://replit.com/" target="_blank">⚡ Replit (Online IDE)</a>
+                <a href="https://www.geeksforgeeks.org/" target="_blank">🤓 GeeksforGeeks</a>
+            </div>
+        </div>
+
+        <!-- Options Section at the Bottom -->
+        <div id="options-section" class="section" style="margin-top:20px;">
+            <h3>Select Platforms</h3>
+            <label><input type="checkbox" value="codeforces.com"> Codeforces</label><br>
+            <label><input type="checkbox" value="leetcode.com"> LeetCode</label><br>
+            <label><input type="checkbox" value="codechef.com"> CodeChef</label><br>
+            <label><input type="checkbox" value="topcoder.com"> TopCoder</label><br>
+            <button id="save-options" class="btn" style="margin-top:10px;">Save Platforms</button>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>
